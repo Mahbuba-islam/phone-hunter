@@ -19,7 +19,7 @@ for(const phone of data){
     <div class="card-body">
       <h5 class="card-title">${phone.phone_name}</h5>
       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <button onclick="phoneDetails()" class="text-center btn-primary ">Details</button>
+      <button onclick="phoneDetails('${phone.slug}')" class="text-center btn-primary ">Details</button>
     </div>
   </div>`
    
@@ -27,9 +27,15 @@ for(const phone of data){
 }
 }
 
-const phoneDetails = () => {
+const phoneDetails = (id) => {
   const url = `https://openapi.programming-hero.com/api/phone/${id}`
   fetch(url)
   .then(res => res.json())
-  .then(data => console.log(data))
+  .then(data => detailsDisplay(data.data))
+}
+
+const detailsDisplay = (data) => {
+  document.getElementById('details-container').innerHTML =
+  `<div>stroage: ${data.mainFeatures}</div>`
+
 }
