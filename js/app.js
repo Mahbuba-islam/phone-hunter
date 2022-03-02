@@ -15,9 +15,8 @@ const allPhone = () =>
 const displayPhones = data => {
 const searchResult = document.getElementById('search-result')
 searchResult.textContent = ''
-// if(phone.length == ''){
-//   please show display
-// }
+
+
 data.forEach(phone => {
   console.log(phone)
   const div = document.createElement('div')
@@ -46,17 +45,22 @@ const phoneDetails = (id) => {
   .then(res => res.json())
   .then(data => detailsDisplay(data.data))
 };
+
   
 //  display phone details
 const detailsDisplay = data => {
- console.log(data)
  const detailsContainer = document.getElementById('details-container')
+ 
  detailsContainer.innerHTML = 
  `<div> <img src="${data.image}" alt=""></div>
    <h2>Brand: ${data.brand}</h2>
-   <p>Stroage: ${data.mainFeatures.storage} </p>`
+   <p>Stroage: ${data.mainFeatures.storage} </p>
+   <p>Sensors: ${data.mainFeatures.storage.releaseDate}</p>`
+   
 
 };
+
+
 
 
 
