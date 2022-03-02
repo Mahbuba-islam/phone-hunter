@@ -1,3 +1,4 @@
+  // load search name api
 const allPhone = () => 
    {
     const searchBox = document.getElementById('search-input')
@@ -8,34 +9,55 @@ const allPhone = () =>
     .then(res => res.json())
     .then (data => displayPhones (data.data))
     
-}
-   
+};
+ 
+//  display  all phones
 const displayPhones = data => {
 const searchResult = document.getElementById('search-result')
-for(const phone of data){
+searchResult.textContent = ''
+// if(phone.length == ''){
+//   please show display
+// }
+data.forEach(phone => {
+  console.log(phone)
   const div = document.createElement('div')
+  div.classList.add('col')
   div.innerHTML = `<div class="card" style="width: 18rem; ">
     <img src="${phone.image}" class="card-img-top w-50" alt="...">
     <div class="card-body">
       <h5 class="card-title">${phone.phone_name}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <h6 class="card-text">Brand: ${phone.brand}</h6>
       <button onclick="phoneDetails('${phone.slug}')" class="text-center btn-primary ">Details</button>
     </div>
   </div>`
    
   searchResult.appendChild(div)
-}
-}
 
+})
+};
+
+
+  // load details api
 const phoneDetails = (id) => {
   const url = `https://openapi.programming-hero.com/api/phone/${id}`
   fetch(url)
   .then(res => res.json())
   .then(data => detailsDisplay(data.data))
+};
+  
+//  display phone details
+const detailsDisplay = data => {
+ console.log(data)
+ const detailsContainer = document.getElementById('details-container')
+ detailsContainer.innerHTML = 
+ `<div> <img src="${data.image}" alt=""></div>
+   <h2>Brand: ${data.brand}</h2>
+   <p>Stroage: ${data.mainFeatures.storage} </p>`
+
+};
+
+const displayOthers = () =>{
+  
 }
 
-const detailsDisplay = (data) => {
-  document.getElementById('details-container').innerHTML =
-  `<div>stroage: ${data.mainFeatures}</div>`
 
-}
