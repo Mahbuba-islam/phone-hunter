@@ -28,6 +28,8 @@ data.forEach(phone => {
       <h5 class="card-title">${phone.phone_name}</h5>
       <h6 class="card-text">Brand: ${phone.brand}</h6>
       <button onclick="phoneDetails('${phone.slug}')" class="text-center btn-primary ">Details</button>
+      <button onclick="displayOthers('${phone.slug}')" class="text-center btn-primary ">Others</button>
+
     </div>
   </div>`
    
@@ -56,8 +58,16 @@ const detailsDisplay = data => {
 
 };
 
-const displayOthers = () =>{
-  
+
+
+
+
+const displayOthers = (data) =>{
+  const detailsOther = document.getElementById('details-other')
+  detailsOther.innerHTML = 
+  `<div><img src="${data.image}" alt=""></div>
+  <h2>brand: ${data.brand} </h2>
+  <p>Wlan: ${data.others?.WLAN}</p>`
 }
 
 
